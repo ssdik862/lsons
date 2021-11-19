@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["es6"], 
+    "declaration": true,
+    "rootDir": "lib",
+    "outDir": "src",
+    "strict": true, 
+    "noImplicitAny": true,   
+    "moduleResolution": "node",   
+    "esModuleInterop": true,  
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+      "lib/**/*.ts"
+  ],
+  "exclude": [
+      "node_modules"
+  ]
+}

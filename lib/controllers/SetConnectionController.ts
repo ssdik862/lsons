@@ -24,10 +24,10 @@ class SetConnectionController {
       sessionId: '',
     };
 
-    console.log('req.session.id', req.session.id);
+    console.log('req.session.id', req?.session?.id);
 
     try {
-      const userKey = req.session?.userKey ?? nanoid(6);
+      const userKey = req.session?.userKey ?? nanoid(3);
       console.log('userKey', userKey);
       req.session.views = req?.session?.views ? req.session.views += 1 : 1;
 

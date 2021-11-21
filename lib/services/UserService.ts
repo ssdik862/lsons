@@ -12,12 +12,20 @@ class UserService {
     return user;
   }
 
-  static getCryptoPriceByName(cryptoName: string): number {
+  static getCryptoPriceByName(
+    {
+      cryptoSymbol,
+      cryptoSymbolConvertTo,
+    }: {
+      cryptoSymbol: string;
+      cryptoSymbolConvertTo: string;
+    },
+  ): number {
     console.log('db.data', db.data);
 
     let price: number = 0;
     if (db.data) {
-      price = db.data[cryptoName];
+      price = db.data[cryptoSymbol][cryptoSymbolConvertTo];
     }
 
     return price;

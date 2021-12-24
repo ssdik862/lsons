@@ -1,9 +1,10 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
 import { IBaseUser, IUserCrypto } from '../@types/interfaces';
-import User from '../classes/user';
+import createPath from '../helpers/createPath';
 import myCache from '../services/CacheService';
 import UserService from '../services/UserService';
+import User from '../classes/user';
 
 declare module 'express-session' {
   interface Session {
@@ -50,6 +51,20 @@ class SetConnectionController {
       console.error('eee', error);
       SetConnectionController.handleError(res, error);
     }
+
+    // return res.status(200).json(reply);
+    return res.render(createPath('index'), { reply });
+  }
+
+  static async getConnectionInfo(req: express.Request, res: express.Response) {
+    const reply: any = {};
+    console.log('req.session.id', req?.session?.id);
+
+    const userKey = req.session?.userKey ?? nanoid(3);
+    const user: IBaseUser | undefined = await UserService.getUser(userKey);
+    reply.user = user;
+    reply.session = req.session;
+    reply.sessionId = req?.session?.id;
 
     return res.status(200).json(reply);
   }

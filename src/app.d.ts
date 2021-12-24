@@ -1,2 +1,6 @@
-declare const app: import("express-serve-static-core").Express;
-export default app;
+declare module 'express-session' {
+    interface Session {
+        key: string;
+    }
+}
+export {};

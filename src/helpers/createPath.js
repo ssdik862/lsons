@@ -1,3 +1,4 @@
 import path from 'path';
-const createPath = (page) => path.resolve('views', `${page}.ejs`);
+const sourceDir = 'lib';
+const createPath = (page) => path.resolve(sourceDir, 'views', `${page}.ejs`);
 export default createPath;

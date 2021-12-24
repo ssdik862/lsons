@@ -1,4 +1,5 @@
 import myCache from '../services/CacheService';
+import CryptoService from '../services/CryptoService';
 import UserService from '../services/UserService';
 // Добавим обычный рест маршрут, чтобы можно было на сервер через post/get передать id юзера.
 // Если полученный по ресту id уже есть
@@ -17,7 +18,7 @@ class UserController {
             user = await UserService.getUser(id);
             console.log('user', user);
             if (user) {
-                user.session.crypto.BTC = UserService.getCryptoPriceByName({ cryptoSymbol: 'BTC', cryptoSymbolConvertTo: 'USD' });
+                user.session.crypto.BTC = CryptoService.getCryptoPriceByName({ cryptoSymbol: 'BTC', cryptoSymbolConvertTo: 'USD' });
                 reply.success = true;
                 reply.info = `user with key ${id} was found`;
                 reply.user = user;
@@ -30,12 +31,14 @@ class UserController {
     }
     static async destriyUserSessionById(req, res) {
         const { id } = req.params;
+        const sessionId = req.session.id;
+        console.log('sessionId', sessionId);
         myCache.del(id);
         req.session.destroy((err) => {
             if (err) {
                 return res.status(400).json(err);
             }
-            return res.status(200).send('session destroy success');
+            return res.status(200).send(`session with id ${sessionId} destroy success`);
         });
     }
     static handleError = (res, error) => res.status(500).send(error.message);

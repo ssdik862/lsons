@@ -8,7 +8,8 @@ declare module 'express-session' {
     }
 }
 declare class SetConnectionController {
-    static setConnection(req: express.Request, res: express.Response): Promise<express.Response<any, Record<string, any>>>;
+    static setConnection(req: express.Request, res: express.Response): Promise<void>;
+    static getConnectionInfo(req: express.Request, res: express.Response): Promise<express.Response<any, Record<string, any>>>;
     static handleError: (res: express.Response, error: any) => express.Response<any, Record<string, any>>;
 }
 export default SetConnectionController;

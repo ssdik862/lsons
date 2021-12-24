@@ -35,5 +35,5 @@ setInterval(async () => {
         db.write();
     }
     console.log('data', data);
-}, 5000);
+}, 15000);
 export default db;
